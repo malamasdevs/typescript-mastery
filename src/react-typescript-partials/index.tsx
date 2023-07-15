@@ -8,14 +8,20 @@ interface UserProfile {
   address: string;
 }
 
+/**
+ * Custom Input structure
+ */
 interface InputProps {
-  label: string;
-  name: keyof UserProfile;
-  type: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string; // Label for the input field
+  name: keyof UserProfile; // Name of the field in the user profile object
+  type: string; // Type of the input field
+  value: string; // Value of the input field
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; // Event handler for input change
 }
 
+/**
+ * Custom Input component that simplifies the rendering of input fields
+ */
 const Input: React.FC<InputProps> = ({
   label,
   name,
@@ -40,8 +46,10 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
+/**
+ * Partials01 component
+ */
 const Partials01: React.FC = () => {
-  // Initialize the state with an empty user profile object
   const [userProfile, setUserProfile] = useState<Partial<UserProfile>>({
     name: "",
     email: "",
@@ -50,9 +58,7 @@ const Partials01: React.FC = () => {
   });
 
   /**
-   * Handle the input field changes and update the corresponding property in the user profile.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} event - The event object containing the input field changes.
+   * Event handler for input field changes
    */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -63,13 +69,10 @@ const Partials01: React.FC = () => {
   };
 
   /**
-   * Handle the form submission.
-   *
-   * @param {React.FormEvent} event - The form submission event.
+   * Event handler for form submission
    */
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Perform validation and submit the updated user profile
     console.log("Updated User Profile:", userProfile);
   };
 
@@ -83,7 +86,7 @@ const Partials01: React.FC = () => {
             label="Name"
             name="name"
             type="text"
-            value={userProfile.name}
+            value={userProfile.name || ""}
             onChange={handleChange}
           />
 
@@ -92,7 +95,7 @@ const Partials01: React.FC = () => {
             label="Email"
             name="email"
             type="email"
-            value={userProfile.email}
+            value={userProfile.email || ""}
             onChange={handleChange}
           />
 
@@ -101,7 +104,7 @@ const Partials01: React.FC = () => {
             label="Phone"
             name="phone"
             type="tel"
-            value={userProfile.phone}
+            value={userProfile.phone || ""}
             onChange={handleChange}
           />
 
@@ -110,7 +113,7 @@ const Partials01: React.FC = () => {
             label="Address"
             name="address"
             type="text"
-            value={userProfile.address}
+            value={userProfile.address || ""}
             onChange={handleChange}
           />
 
