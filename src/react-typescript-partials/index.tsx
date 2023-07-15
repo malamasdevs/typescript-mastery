@@ -20,6 +20,7 @@ const Partials01: React.FC = () => {
   // Handle the input field changes and update the corresponding property in the user profile
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    console.log(name, "NAME");
     setUserProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
@@ -52,6 +53,7 @@ const Partials01: React.FC = () => {
               type="text"
               value={userProfile.name}
               onChange={handleChange}
+              name="name"
             />
           </div>
           {/* Input field for the email */}
@@ -68,6 +70,7 @@ const Partials01: React.FC = () => {
               type="email"
               value={userProfile.email}
               onChange={handleChange}
+              name="email"
             />
           </div>
           {/* Input field for the phone */}
@@ -82,6 +85,7 @@ const Partials01: React.FC = () => {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="tel"
+              name="phone"
               value={userProfile.phone}
               onChange={handleChange}
             />
@@ -98,6 +102,7 @@ const Partials01: React.FC = () => {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="address"
               type="text"
+              name="address"
               value={userProfile.address}
               onChange={handleChange}
             />
