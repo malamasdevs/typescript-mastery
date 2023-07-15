@@ -8,6 +8,38 @@ interface UserProfile {
   address: string;
 }
 
+interface InputProps {
+  label: string;
+  name: keyof UserProfile;
+  type: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  type,
+  value,
+  onChange,
+}) => {
+  return (
+    <div className="mb-4">
+      <label className="block text-gray-700 font-bold mb-2" htmlFor={name}>
+        {label}
+      </label>
+      <input
+        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id={name}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  );
+};
+
 const Partials01: React.FC = () => {
   // Initialize the state with an empty user profile object
   const [userProfile, setUserProfile] = useState<Partial<UserProfile>>({
@@ -17,17 +49,24 @@ const Partials01: React.FC = () => {
     address: "",
   });
 
-  // Handle the input field changes and update the corresponding property in the user profile
+  /**
+   * Handle the input field changes and update the corresponding property in the user profile.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The event object containing the input field changes.
+   */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, "NAME");
     setUserProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
     }));
   };
 
-  // Handle the form submission
+  /**
+   * Handle the form submission.
+   *
+   * @param {React.FormEvent} event - The form submission event.
+   */
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // Perform validation and submit the updated user profile
@@ -40,73 +79,41 @@ const Partials01: React.FC = () => {
         <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
         <form onSubmit={handleSubmit}>
           {/* Input field for the name */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              value={userProfile.name}
-              onChange={handleChange}
-              name="name"
-            />
-          </div>
+          <Input
+            label="Name"
+            name="name"
+            type="text"
+            value={userProfile.name}
+            onChange={handleChange}
+          />
+
           {/* Input field for the email */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              value={userProfile.email}
-              onChange={handleChange}
-              name="email"
-            />
-          </div>
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            value={userProfile.email}
+            onChange={handleChange}
+          />
+
           {/* Input field for the phone */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="phone"
-            >
-              Phone
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phone"
-              type="tel"
-              name="phone"
-              value={userProfile.phone}
-              onChange={handleChange}
-            />
-          </div>
+          <Input
+            label="Phone"
+            name="phone"
+            type="tel"
+            value={userProfile.phone}
+            onChange={handleChange}
+          />
+
           {/* Input field for the address */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="address"
-            >
-              Address
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="address"
-              type="text"
-              name="address"
-              value={userProfile.address}
-              onChange={handleChange}
-            />
-          </div>
+          <Input
+            label="Address"
+            name="address"
+            type="text"
+            value={userProfile.address}
+            onChange={handleChange}
+          />
+
           {/* Submit button */}
           <div className="flex justify-end">
             <button
